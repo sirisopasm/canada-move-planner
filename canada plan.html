@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canada Move Planner 🇨🇦 - คู่มือและผู้ช่วยวางแผนสำหรับคนไทย</title>
+    <style>
+        :root {
+            --primary: #D80027;
+            --primary-hover: #B00020;
+            --bg: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text: #212529;
+            --text-muted: #6C757D;
+            --border: #DEE2E6;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --success: #28A745;
+            --warning: #FFC107;
+            --info: #17A2B8;
+            --dark-gray: #2B2D42;
+        }
+
+        body.dark-mode {
+            --bg: #121212;
+            --card-bg: #1E1E1E;
+            --text: #F8F9FA;
+            --text-muted: #A0A0A0;
+            --border: #333333;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --dark-gray: #161625;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        nav {
+            background-color: var(--dark-gray);
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .section-page {
+            display: none;
+        }
+
+        .section-page.active {
+            display: block;
+        }
+
+        /* Cards & Layout */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* Buttons & Inputs */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--text-muted);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #DC3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #BD2130;
+        }
+
+        input[type="text"], input[type="number"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text);
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--border);
+            border-radius: 10px;
+            height: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Checklist */
+        .checklist-group {
+            margin-bottom: 25px;
+        }
+
+        .checklist-group h3 {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .checklist-item:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checklist-item.done label {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Warnings & Disclaimers */
+        .warning-box {
+            background-color: rgba(255, 193, 7, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .disclaimer-box {
+            background-color: rgba(108, 117, 125, 0.1);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 30px;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        /* Accordion */
+        .accordion-item {
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 12px 15px;
+            background-color: rgba(0,0,0,0.03);
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-content {
+            padding: 15px;
+            display: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        /* Toast & Modal */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 2000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1500;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        /* Search Results Cards */
+        .search-card {
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: var(--card-bg);
+            cursor: pointer;
+        }
+
+        /* Responsive UI */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-inner {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-inner.show { display: flex; }
+            .nav-btn { width: 100%; text-align: left; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-title">
+                <span>🇨🇦</span>
+                <span>Canada Move Planner</span>
+            </div>
+            <div class="nav-controls">
+                <button class="btn btn-outline" id="theme-toggle" style="color:white; border-color:white;" onclick="toggleDarkMode()">🌙 Dark</button>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-inner" id="nav-menu">
+            <button class="nav-btn active" onclick="switchTab('dashboard')">🏠 หน้าแรก</button>
+            <button class="nav-btn" onclick="switchTab('checklist')">✅ Checklist</button>
+            <button class="nav-btn" onclick="switchTab('planner')">📋 วางแผนส่วนบุคคล</button>
+            <button class="nav-btn" onclick="switchTab('timeline')">⏳ Timeline</button>
+            <button class="nav-btn" onclick="switchTab('immigration')">🍁 Immigration</button>
+            <button class="nav-btn" onclick="switchTab('documents')">📄 เอกสาร</button>
+            <button class="nav-btn" onclick="switchTab('budget')">💰 งบประมาณ</button>
+            <button class="nav-btn" onclick="switchTab('cities')">🏙️ เมืองต่าง ๆ</button>
+            <button class="nav-btn" onclick="switchTab('housing')">🏠 ที่พักอาศัย</button>
+            <button class="nav-btn" onclick="switchTab('jobs')">💼 หางาน</button>
+            <button class="nav-btn" onclick="switchTab('healthcare')">🏥 การแพทย์</button>
+            <button class="nav-btn" onclick="switchTab('banking')">🏦 ธนาคาร</button>
+            <button class="nav-btn" onclick="switchTab('tech-transit')">📱 ซิม & ขนส่ง</button>
+            <button class="nav-btn" onclick="switchTab('weather')">❄️ อากาศ & ชุด</button>
+            <button class="nav-btn" onclick="switchTab('packing')">🧳 จัดกระเป๋า</button>
+            <button class="nav-btn" onclick="switchTab('first30')">📅 30 วันแรก</button>
+            <button class="nav-btn" onclick="switchTab('dictionary')">📖 คำศัพท์ (50)</button>
+            <button class="nav-btn" onclick="switchTab('emergency')">🚨 ฉุกเฉิน</button>
+            <button class="nav-btn" onclick="switchTab('official')">🔗 แหล่งข้อมูล</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- GLOBAL SEARCH BAR -->
+        <div class="card" style="padding: 12px; margin-bottom: 20px;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="global-search-input" placeholder="🔍 ค้นหาข้อมูลในเว็บ (เช่น Visa, SIN, Rent, Toronto, Tax)..." style="margin: 0;" onkeyup="handleGlobalSearch()">
+            </div>
+            <div id="search-results" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- 1. DASHBOARD -->
+        <div id="dashboard" class="section-page active">
+            <div class="card" style="background: linear-gradient(135deg, #D80027, #8B0000); color: white;">
+                <h2>🇨🇦 Canada Move Planner</h2>
+                <p>คู่มือและผู้ช่วยวางแผนสำหรับคนไทยที่กำลังเตรียมย้ายไปแคนาดา</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>📊 ความคืบหน้าภาพรวม</h3>
+                    <div class="progress-bar-container">
+                        <div id="dash-progress-bar" class="progress-bar-fill"></div>
+                    </div>
+                    <p style="margin-top: 10px;">ทำไปแล้ว: <strong id="dash-done-count">0</strong> / <span id="dash-total-count">0</span> รายการ (<span id="dash-percent">0%</span>)</p>
+                </div>
+
+                <div class="card">
+                    <h3>📅 นับถอยหลังวันเดินทาง</h3>
+                    <label for="travel-date">กำหนดวันเดินทาง:</label>
+                    <input type="date" id="travel-date" onchange="saveTravelDate()">
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-top: 5px;" id="countdown-text">
+                        กรุณาเลือกวันเดินทาง
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⚡ เมนูด่วน</h3>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <button class="btn" onclick="switchTab('checklist')">✅ เปิด Checklist ทั้งหมด</button>
+                        <button class="btn btn-outline" onclick="switchTab('budget')">💰 คำนวณงบประมาณ</button>
+                        <button class="btn btn-outline" onclick="switchTab('cities')">🏙️ เปรียบเทียบเมือง</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📌 ขั้นตอนถัดไปที่แนะนำ (Next Steps)</h3>
+                <ul id="dash-next-steps" style="padding-left: 20px; margin-top: 10px;">
+                    <!-- JS Filled -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. MASTER CHECKLIST -->
+        <div id="checklist" class="section-page">
+            <h2>✅ Master Checklist รายการเตรียมตัวทั้งหมด</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">ระบบบันทึกสถานะการติ๊กให้อัตโนมัติในเครื่องของคุณ</p>
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <div>ความคืบหน้า: <strong id="checklist-progress-text">0/0</strong></div>
+                    <button class="btn btn-secondary" onclick="resetChecklist()">ล้างค่า Checklist</button>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="checklist-progress-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+            <div id="checklist-container"></div>
+        </div>
+
+        <!-- 3. PERSONAL PLANNER -->
+        <div id="planner" class="section-page">
+            <h2>📋 ประเมินและวางแผนส่วนบุคคล</h2>
+            <div class="card">
+                <p>กรอกข้อมูลเบื้องต้นเพื่อรับคำแนะนำการเตรียมตัวที่เหมาะสมกับคุณ</p>
+                <div class="grid-2">
+                    <div>
+                        <label>อายุ:</label>
+                        <input type="number" id="plan-age" placeholder="เช่น 28">
+                    </div>
+                    <div>
+                        <label>สถานะครอบครัว:</label>
+                        <select id="plan-family">
+                            <option value="single">โสด (ไปคนเดียว)</option>
+                            <option value="couple">คู่รัก/แต่งงานแล้ว (ไม่มีบุตร)</option>
+                            <option value="family">มีครอบครัว (มีบุตร)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>เป้าหมายการไปแคนาดา:</label>
+                        <select id="plan-goal">
+                            <option value="study">ไปเรียน (Study Permit)</option>
+                            <option value="work">ไปทำงาน (Work Permit)</option>
+                            <option value="pr">ย้ายถิ่นฐาน (Express Entry / PNP)</option>
+                            <option value="explore">ไปเที่ยว / สำรวจ (Visitor Visa)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>งบประมาณเริ่มต้น (บาท):</label>
+                        <input type="number" id="plan-budget" placeholder="เช่น 500000">
+                    </div>
+                    <div>
+                        <label>ระดับภาษาอังกฤษ:</label>
+                        <select id="plan-english">
+                            <option value="basic">เริ่มต้น (Basic / IELTS < 5.5)</option>
+                            <option value="intermediate">ปานกลาง (Intermediate / IELTS 6.0-6.5)</option>
+                            <option value="advanced">ดีมาก (Advanced / IELTS 7.0+)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>เมืองที่สนใจเป็นพิเศษ:</label>
+                        <select id="plan-city">
+                            <option value="undecided">ยังไม่ได้ตัดสินใจ</option>
+                            <option value="Toronto">Toronto</option>
+                            <option value="Vancouver">Vancouver</option>
+                            <option value="Calgary">Calgary</option>
+                            <option value="Edmonton">Edmonton</option>
+                            <option value="Ottawa">Ottawa</option>
+                            <option value="Montreal">Montreal</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="generatePersonalPlan()">⚡ สร้างแผนคำแนะนำของฉัน</button>
+            </div>
+
+            <div id="plan-result-card" class="card" style="display: none; border-left: 5px solid var(--primary);">
+                <h3>💡 ผลการวิเคราะห์และคำแนะนำสำหรับคุณ</h3>
+                <div id="plan-result-content" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+
+        <!-- 4. TIMELINE -->
+        <div id="timeline" class="section-page">
+            <h2>⏳ Timeline ตารางเวลาการเดินทาง</h2>
+            <div class="warning-box">วางแผนเวลาล่วงหน้าอย่างน้อย 6-12 เดือนเพื่อป้องกันปัญหาเรื่องเอกสารและวีซ่า</div>
+            <div id="timeline-container"></div>
+        </div>
+
+        <!-- 5. IMMIGRATION GUIDE -->
+        <div id="immigration" class="section-page">
+            <h2>🍁 คู่มือประเภทวีซ่าและการย้ายถิ่นฐาน (Immigration Guide)</h2>
+            <div class="warning-box">
+                <strong>⚠️ คำเตือนสำคัญ (Disclaimer):</strong> กฎ Immigration และเงื่อนไขต่าง ๆ ของแคนาดาสามารถเปลี่ยนแปลงได้ตลอดเวลา โปรดตรวจสอบข้อมูลล่าสุดอย่างเป็นทางการจากเว็บไซต์รัฐบาลแคนาดา (IRCC) ก่อนสมัครหรือชำระเงิน เว็บไซต์นี้ไม่ใช่ตัวแทนทางกฎหมาย
+            </div>
+            <div id="immigration-container"></div>
+        </div>
+
+        <!-- 6. DOCUMENT GUIDE -->
+        <div id="documents" class="section-page">
+            <h2>📄 คู่มือการเตรียมเอกสาร (Document Guide)</h2>
+            <div class="card" style="background-color: rgba(23, 162, 184, 0.1); border-left: 4px solid var(--info);">
+                <h4>💡 คำแนะนำทั่วไปสำหรับการจัดการเอกสาร:</h4>
+                <ul>
+                    <li>สแกนเอกสารสำคัญทั้งหมดเป็นไฟล์ PDF ความละเอียดสูง</li>
+                    <li>สำรองข้อมูลไว้บน Cloud Storage (เช่น Google Drive, OneDrive)</li>
+                    <li>เตรียมเอกสารฉบับจริงและสำเนาอย่างน้อย 2-3 ชุด</li>
+                    <li>เอกสารภาษาไทยต้องได้รับการแปลเป็นภาษาอังกฤษโดยผู้แปลที่ได้รับการรับรอง (Certified Translator)</li>
+                </ul>
+            </div>
+            <div id="documents-container"></div>
+        </div>
+
+        <!-- 7. BUDGET CALCULATOR -->
+        <div id="budget" class="section-page">
+            <h2>💰 เครื่องคำนวณงบประมาณ (Budget Calculator)</h2>
+            <p style="margin-bottom: 15px;">คำนวณเงินสำรองและประมาณการค่าใช้จ่ายในการย้ายไปแคนาดา (หน่วย: CAD $)</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📥 เงินทุนที่มีอยู่</h3>
+                    <label>เงินเก็บสำรองพร้อมใช้ ($ CAD):</label>
+                    <input type="number" id="calc-savings" value="15000" oninput="calculateBudget()">
+
+                    <h3 style="margin-top: 15px;">🛫 ค่าใช้จ่ายครั้งเดียว (ก่อนเดินทาง/แรกเริ่ม)</h3>
+                    <label>ค่าตั๋วเครื่องบิน ($):</label>
+                    <input type="number" id="calc-flight" value="1200" oninput="calculateBudget()">
+                    <label>เงินมัดจำที่พัก (Deposit) ($):</label>
+                    <input type="number" id="calc-deposit" value="1500" oninput="calculateBudget()">
+                    <label>ค่าเสื้อผ้าหนาว & ของใช้แรกเริ่ม ($):</label>
+                    <input type="number" id="calc-winter-gear" value="800" oninput="calculateBudget()">
+                    <label>ค่าทำวีซ่า/ตรวจสุขภาพ/แปลเอกสาร ($):</label>
+                    <input type="number" id="calc-visafees" value="500" oninput="calculateBudget()">
+                    <label>เงินสำรองฉุกเฉิน ($):</label>
+                    <input type="number" id="calc-emergency" value="2000" oninput="calculateBudget()">
+                </div>
+
+                <div class="card">
+                    <h3>🔄 ประมาณการค่าใช้จ่ายต่อเดือน</h3>
+                    <label>ค่าเช่าบ้าน/ห้องพัก ($):</label>
+                    <input type="number" id="calc-rent" value="1200" oninput="calculateBudget()">
+                    <label>ค่าอาหาร/วัตถุดิบ ($):</label>
+                    <input type="number" id="calc-food" value="400" oninput="calculateBudget()">
+                    <label>ค่าเดินทาง/บัตรเดือน ($):</label>
+                    <input type="number" id="calc-transit" value="130" oninput="calculateBudget()">
+                    <label>ค่าโทรศัพท์ ($):</label>
+                    <input type="number" id="calc-phone" value="50" oninput="calculateBudget()">
+                    <label>ค่า Internet บ้าน ($):</label>
+                    <input type="number" id="calc-internet" value="60" oninput="calculateBudget()">
+                    <label>ค่าประกันภัย/สุขภาพ ($):</label>
+                    <input type="number" id="calc-insurance" value="80" oninput="calculateBudget()">
+                    <label>ค่าใช้จ่ายเบ็ดเตล็ด ($):</label>
+                    <input type="number" id="calc-other" value="200" oninput="calculateBudget()">
+                </div>
+            </div>
+
+            <div class="card" style="background-color: rgba(40, 167, 69, 0.1); border-left: 5px solid var(--success);">
+                <h3>📊 ผลการคำนวณและประเมินความปลอดภัยทางการเงิน</h3>
+                <div class="grid-3" style="margin-top: 15px;">
+                    <div>
+                        <p>ค่าใช้จ่ายเริ่มต้น (ครั้งเดียว):</p>
+                        <h4 id="res-upfront" style="color: var(--primary);">$0</h4>
+                    </div>
+                    <div>
+                        <p>ค่าใช้จ่ายรายเดือนรวม:</p>
+                        <h4 id="res-monthly" style="color: var(--primary);">$0</h4>
+                    </div>
+                    <div>
+                        <p>เงินคงเหลือหลังหักค่าใช้จ่ายเริ่มต้น:</p>
+                        <h4 id="res-remaining">$0</h4>
+                    </div>
+                </div>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid var(--border);">
+                <div class="grid-3">
+                    <div>
+                        <p>ประมาณการรวม 3 เดือน:</p>
+                        <h4 id="res-3months">$0</h4>
+                    </div>
+                    <div>
+                        <p>ประมาณการรวม 6 เดือน:</p>
+                        <h4 id="res-6months">$0</h4>
+                    </div>
+                    <div>
+                        <p>เงินเก็บรองรับการใช้ชีวิตได้ประมาณ:</p>
+                        <h4 id="res-runway" style="font-size: 1.3rem; color: var(--success);">0 เดือน</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. CITY COMPARISON -->
+        <div id="cities" class="section-page">
+            <h2>🏙️ ข้อมูลและระบบเปรียบเทียบเมืองในแคนาดา</h2>
+            <div class="warning-box">หมายเหตุ: ระดับค่าครองชีพและค่าเช่าอ้างอิงเป็นระดับเปรียบเทียบเชิงสัมพัทธ์ (ต่ำ/กลาง/สูง) ไม่ใช้ตัวเลขราคาตายตัวเนื่องจากสภาวะตลาดเปลี่ยนได้ตลอดเวลา</div>
+            
+            <div class="card">
+                <h3>⚖️ ระบบเปรียบเทียบ 2 เมือง</h3>
+                <div class="grid-2">
+                    <div>
+                        <label>เลือกเมืองที่ 1:</label>
+                        <select id="city-select-1" onchange="compareCities()">
+                            <!-- JS Filled -->
+                        </select>
+                    </div>
+                    <div>
+                        <label>เลือกเมืองที่ 2:</label>
+                        <select id="city-select-2" onchange="compareCities()">
+                            <!-- JS Filled -->
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive" id="city-comparison-table-container"></div>
+            </div>
+
+            <h3>🌆 รายละเอียดเมืองทั้งหมด</h3>
+            <div id="city-cards-container" class="grid-2"></div>
+        </div>
+
+        <!-- 9. HOUSING GUIDE -->
+        <div id="housing" class="section-page">
+            <h2>🏠 คู่มือการหาที่พักอาศัย (Housing Guide)</h2>
+            <div class="card">
+                <h3>🏢 ประเภทที่พักในแคนาดา</h3>
+                <div id="housing-types-container" class="grid-2" style="margin-top: 15px;"></div>
+            </div>
+
+            <div class="card">
+                <h3>📌 หัวข้อสำคัญที่ต้องตรวจสอบในการเช่า</h3>
+                <div class="grid-3">
+                    <div><strong>1. Location (ทำเล):</strong> ใกล้ Transit หรือไม่? มี Grocery Store ในระยะเดินหรือไม่?</div>
+                    <div><strong>2. Lease (สัญญาเช่า):</strong> โดยทั่วไปเป็นสัญญา 1 ปี ตรวจสอบเงื่อนไขการยกเลิก</div>
+                    <div><strong>3. Deposit (มัดจำ):</strong> ส่วนใหญ่ใช้ Rent Deposit (เช่น ค่าเช่าเดือนแรก+เดือนสุดท้าย)</div>
+                    <div><strong>4. Utilities (ค่าไฟ/น้ำ/ทำความร้อน):</strong> เช็คว่ารวมในค่าเช่าหรือต้องจ่ายแยก</div>
+                    <div><strong>5. Laundry (ซักผ้า):</strong> เป็น In-suite (ในห้อง) หรือ Shared Laundry (ใช้รวม)</div>
+                    <div><strong>6. Heating (ความร้อน):</strong> สำคัญมากในหน้าหนาว เช็คว่าเป็นระบบอะไร</div>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 5px solid #DC3545; background-color: rgba(220, 53, 69, 0.05);">
+                <h3>🚨 วิธีระวัง Rental Scam (การหลอกลวงเช่าบ้าน)</h3>
+                <p>สัญญาณเตือนที่ต้องระวังอย่างเข้มงวด:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>ราคาเช่าถูกกว่าราคาตลาดในย่านนั้นอย่างผิดปกติ</li>
+                    <li>ผู้ให้เช่าอ้างว่าอยู่ต่างประเทศ ไม่สามารถพาไปดูสถานที่จริงได้</li>
+                    <li>เร่งรัดให้โอนเงินมัดจำทันทีผ่านทาง MoneyGram, Wire Transfer หรือ Cryptocurrency</li>
+                    <li>ขอข้อมูลส่วนบุคคลที่มีความอ่อนไหวมากเกินไปก่อนทำสัญญา</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 10. JOB GUIDE -->
+        <div id="jobs" class="section-page">
+            <h2>💼 คู่มือการหางานในแคนาดา (Job Guide)</h2>
+            <div id="job-guide-container"></div>
+
+            <div class="card">
+                <h3>📄 ตัวอย่างโครงสร้าง Resumé ตามมาตรฐาน Canadian Format</h3>
+                <div style="background-color: rgba(0,0,0,0.03); padding: 15px; border-radius: 5px; font-family: monospace;">
+                    <h4>[FIRST NAME] [LAST NAME]</h4>
+                    <p>City, Province | Phone Number | Email | LinkedIn URL</p>
+                    <hr style="margin: 10px 0;">
+                    <strong>PROFESSIONAL SUMMARY</strong>
+                    <p>Results-driven professional with 5+ years of experience in...</p>
+                    <br>
+                    <strong>SKILLS</strong>
+                    <p>Technical Skills: Python, SQL, Excel | Soft Skills: Team Leadership, Communication</p>
+                    <br>
+                    <strong>WORK EXPERIENCE</strong>
+                    <p><strong>Job Title</strong> – Company Name | Date - Present</p>
+                    <ul>
+                        <li>Achieved X% increase in efficiency by implementing...</li>
+                        <li>Managed a team of 5 to successfully deliver...</li>
+                    </ul>
+                    <br>
+                    <strong>EDUCATION</strong>
+                    <p>Bachelor of Science in Computer Science - University Name (Year)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. HEALTHCARE GUIDE -->
+        <div id="healthcare" class="section-page">
+            <h2>🏥 ระบบการแพทย์และสุขภาพ (Healthcare Guide)</h2>
+            <div class="warning-box">ระบบสวัสดิการสุขภาพ (Provincial Health Insurance) ขึ้นอยู่กับแต่ละจังหวัดและสถานะวีซ่าของคุณ บางจังหวัดอาจมีช่วงเวลารอคอย (Waiting Period 3 เดือน) จึงควรเตรียมประกันสุขภาพเอกชนสำหรับช่วงแรก</div>
+            <div id="healthcare-container" class="grid-2"></div>
+        </div>
+
+        <!-- 12. BANKING GUIDE -->
+        <div id="banking" class="section-page">
+            <h2>🏦 ระบบธนาคารและการเงิน (Banking Guide)</h2>
+            <div id="banking-container" class="grid-2"></div>
+            
+            <div class="card" style="margin-top:20px;">
+                <h3>📋 สิ่งที่ควรเตรียมเมื่อไปเปิดบัญชีธนาคาร (Newcomer Account)</h3>
+                <ul>
+                    <li>Passport ฉบับจริง</li>
+                    <li>เอกสารสถานะการพำนัก (Study Permit / Work Permit / COPR / PR Card)</li>
+                    <li>Social Insurance Number (SIN) - ถ้ามี</li>
+                    <li>เอกสารยืนยันที่อยู่ (Proof of Address) เช่น สัญญาเช่าบ้าน</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 13. TECH & TRANSIT -->
+        <div id="tech-transit" class="section-page">
+            <h2>📱 ซิมโทรศัพท์ & 🚌 ระบบขนส่งสาธารณะ</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📱 โทรศัพท์ & อินเทอร์เน็ต</h3>
+                    <p><strong>SIM vs eSIM:</strong> สามารถเปิดใช้ eSIM จากไทยสำหรับวันแรก ๆ ได้สะดวก</p>
+                    <p><strong>Prepaid vs Postpaid:</strong> รายเดือน (Postpaid) มักต้องใช้วิธีตรวจ Credit Check หรือใช้บัตรเครดิต</p>
+                    <div style="margin-top:15px;">
+                        <h4>📝 บันทึกแพ็กเกจโทรศัพท์ที่สนใจ</h4>
+                        <input type="text" id="phone-provider" placeholder="ค่ายมือถือ (เช่น Fido, Koodo)">
+                        <input type="text" id="phone-plan" placeholder="รายละเอียด/ราคาต่อเดือน">
+                        <button class="btn btn-outline" onclick="savePhoneNote()">บันทึกโน้ต</button>
+                        <p id="phone-note-saved" style="margin-top:5px; color:var(--success); font-size:0.85rem;"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🚌 ระบบขนส่งสาธารณะ (Public Transit)</h3>
+                    <ul>
+                        <li><strong>Bus / Subway / Light Rail:</strong> ระบบหลักในเมืองใหญ่ ใช้บัตรเติมเงินประจำเมือง (เช่น PRESTO ใน Toronto, Compass ใน Vancouver)</li>
+                        <li><strong>Driving / Driver's License:</strong> ควรเตรียมใบขับขี่ไทยและใบขับขี่สากล (IDP) มาด้วย เพื่อใช้อนุญาตขับขี่ชั่วคราวและใช้ทำเรื่องเทียบใบขับขี่ประจำจังหวัด</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14. WEATHER & CLOTHING -->
+        <div id="weather" class="section-page">
+            <h2>❄️ สภาพอากาศและการแต่งตัว (Weather & Clothing Guide)</h2>
+            <div class="card">
+                <h3>🧥 เทคนิคการแต่งตัวแบบ Layering (สำหรับหน้าหนาว)</h3>
+                <div class="grid-3" style="margin-top: 15px;">
+                    <div>
+                        <h4>1. Base Layer (ชั้นในสุด)</h4>
+                        <p>Thermal / Long Johns กระชับร่างกาย ทำหน้าที่เก็บความร้อนและระบายความชื้น</p>
+                    </div>
+                    <div>
+                        <h4>2. Mid Layer (ชั้นกลาง)</h4>
+                        <p>เสื้อไหมพรม เสื้อ Fleece ช่วยสร้างฉนวนกันความเย็นเพิ่มเติม</p>
+                    </div>
+                    <div>
+                        <h4>3. Outer Layer (ชั้นนอก)</h4>
+                        <p>Winter Coat / Down Jacket ที่กันลมและกันน้ำได้ดี</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>👒 อุปกรณ์เสริมที่จำเป็นในฤดูหนาว</h3>
+                <p>Winter Hat (Beanie), Gloves (ถุงมือกันลม/น้ำ), Scarf (ผ้าพันคอ), Warm Socks (ถุงมือวูล), Winter Boots (รองเท้าลุยหิมะที่มีดอกยางกันลื่น)</p>
+            </div>
+        </div>
+
+        <!-- 15. PACKING CHECKLIST -->
+        <div id="packing" class="section-page">
+            <h2>🧳 รายการของที่ต้องเตรียมจากไทย (What to bring)</h2>
+            <div class="warning-box">
+                <strong>🚨 ข้อควรระวังด้านศุลกากร (CBSA):</strong> ห้ามนำเข้าเนื้อสัตว์สด/แปรรูป, พืช, เมล็ดพันธุ์, ผลิตภัณฑ์จากสัตว์ และยาปฏิชีวนะบางชนิดโดยไม่มีใบรับรอง หากมีสงสัยต้องสำแดง (Declare) ทุกครั้ง
+            </div>
+            <div class="card">
+                <div id="packing-checklist-container"></div>
+            </div>
+        </div>
+
+        <!-- 16. FIRST 30 DAYS -->
+        <div id="first30" class="section-page">
+            <h2>📅 แผนการดำเนินงาน 30 วันแรกหลังถึงแคนาดา</h2>
+            <div id="first30-container"></div>
+        </div>
+
+        <!-- 17. DICTIONARY -->
+        <div id="dictionary" class="section-page">
+            <h2>📖 คำศัพท์สำคัญสำหรับการย้ายอยู่อาศัย (50 คำ)</h2>
+            <input type="text" id="dict-search" placeholder="🔍 ค้นหาคำศัพท์ (อังกฤษ หรือ ไทย)..." onkeyup="filterDictionary()">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>English</th>
+                            <th>คำแปลไทย</th>
+                            <th>คำอธิบายบริบท</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dict-table-body">
+                        <!-- JS Filled -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 18. EMERGENCY -->
+        <div id="emergency" class="section-page">
+            <h2>🚨 เบอร์ฉุกเฉินและข้อมูลสำคัญ (Emergency)</h2>
+            <div class="card" style="background-color: rgba(220, 53, 69, 0.1); border-left: 5px solid #DC3545;">
+                <h3>🚨 เบอร์โทรฉุกเฉินระดับประเทศ: 911</h3>
+                <p>ใช้เฉพาะเหตุฉุกเฉินคุกคามชีวิต เหตุด่วนเหตุร้าย เพลิงไหม้ หรือต้องการรถพยาบาลด่วนเท่านั้น</p>
+            </div>
+
+            <div class="card">
+                <h3>📝 บันทึกข้อมูลส่วนบุคคลและผู้ติดต่อฉุกเฉิน</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">ข้อมูลส่วนนี้จะถูกบันทึกไว้ใน Browser ของคุณเท่านั้น ไม่มีการส่งไปที่อื่น</p>
+                <div class="grid-2" style="margin-top: 15px;">
+                    <div>
+                        <label>ที่อยู่ในแคนาดา:</label>
+                        <textarea id="em-address" rows="2" onchange="saveEmergencyData()"></textarea>
+                    </div>
+                    <div>
+                        <label>ผู้ติดต่อฉุกเฉิน (Emergency Contact):</label>
+                        <input type="text" id="em-contact" onchange="saveEmergencyData()">
+                    </div>
+                    <div>
+                        <label>เจ้าของบ้าน / ผู้ดูแลที่พัก (Landlord):</label>
+                        <input type="text" id="em-landlord" onchange="saveEmergencyData()">
+                    </div>
+                    <div>
+                        <label>นายจ้าง / สถานศึกษา:</label>
+                        <input type="text" id="em-employer" onchange="saveEmergencyData()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 19. OFFICIAL RESOURCES -->
+        <div id="official" class="section-page">
+            <h2>🔗 แหล่งข้อมูลทางการ (Official Resources)</h2>
+            <div class="card">
+                <ul>
+                    <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship.html" target="_blank">IRCC - Immigration, Refugees and Citizenship Canada</a></li>
+                    <li><a href="https://www.canada.ca/en/employment-social-development/services/sin.html" target="_blank">Service Canada (Social Insurance Number - SIN)</a></li>
+                    <li><a href="https://www.cbsa-asfc.gc.ca/" target="_blank">CBSA - Canada Border Services Agency</a></li>
+                    <li><a href="https://www.canada.ca/en/revenue-agency.html" target="_blank">CRA - Canada Revenue Agency</a></li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top:20px;">
+                <h3>💾 จัดการข้อมูลของคุณ (Data Management)</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-outline" onclick="exportData()">📥 Export ข้อมูลของฉัน (JSON)</button>
+                    <button class="btn btn-danger" onclick="confirmResetAll()">🗑️ ล้างข้อมูลทั้งหมดในแอป</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISCLAIMER FOOTER -->
+        <div class="disclaimer-box">
+            <strong>Disclaimer / ข้อความปฏิเสธความรับผิดชอบ:</strong> เว็บไซต์ “Canada Move Planner” จัดทำขึ้นเพื่อวัตถุประสงค์ในการให้ข้อมูลเบื้องต้นและการวางแผนส่วนบุคคลเท่านั้น ไม่ใช่คำแนะนำทางกฎหมาย การเงิน หรือการย้ายถิ่นฐาน (Immigration Advice) กฎหมาย ระเบียบ ค่าธรรมเนียม และเงื่อนไขต่าง ๆ อาจมีการเปลี่ยนแปลงได้ ผู้ใช้งานควรตรวจสอบข้อมูลล่าสุดกับหน่วยงานรัฐบาลแคนาดาที่เกี่ยวข้องเสมอ
+        </div>
+
+    </div>
+
+    <div id="toast">บันทึกข้อมูลแล้ว</div>
+
+    <script>
+        // ==========================================
+        // DATA STRUCTURES
+        // ==========================================
+
+        const masterChecklistData = [
+            {
+                category: "1. Immigration (การตรวจและเตรียมวีซ่า)",
+                items: [
+                    "ตรวจสอบประเภทวีซ่าหรือ Permit ที่เหมาะสม",
+                    "ตรวจสอบคุณสมบัติขั้นพื้นฐานตามเกณฑ์ IRCC",
+                    "ตรวจสอบวันหมดอายุ Passport (ควรมียาวเกินระยะเวลาเดินทาง)",
+                    "เตรียมเอกสารประจำตัวฉบับแปลภาษาอังกฤษ",
+                    "ตรวจสอบผลสอบภาษา (IELTS General / Academic / CELPIP)",
+                    "ตรวจสอบการประเมินวุฒิการศึกษา (ECA) หากจำเป็น",
+                    "เตรียมเอกสารรับรองการทำงาน (Employment Reference Letters)",
+                    "เตรียมเอกสารทางการเงิน (Proof of Funds)",
+                    "ตรวจสอบและนัดหมายพิมพ์ลายนิ้วมือ (Biometrics)",
+                    "ตรวจสุขภาพตามรายการที่กำหนด (Medical Exam)",
+                    "ขอหนังสือรับรองประวัติการกระทำผิดทางอาญา (Police Certificate)",
+                    "ชำระค่าธรรมเนียมตามระบบ IRCC",
+                    "เก็บสแกนสำเนาเอกสารทั้งหมดไว้ใน Cloud"
+                ]
+            },
+            {
+                category: "2. Documents (เอกสารสำคัญ)",
+                items: [
+                    "Passport (ตัวจริงและสำเนา)",
+                    "Birth Certificate (สูติบัตร)",
+                    "National ID (บัตรประชาชน)",
+                    "Marriage Certificate (ทะเบียนสมรส - หากมี)",
+                    "Divorce Certificate (ใบหย่า - หากมี)",
+                    "Diploma / Degree (ปริญญาบัตร)",
+                    "Transcript (ใบแสดงผลการเรียน)",
+                    "Employment Letter (หนังสือรับรองการทำงาน)",
+                    "Reference Letter (หนังสือรับรองจากนายจ้าง)",
+                    "Resume / CV (ฉบับรูปแบบแคนาดา)",
+                    "Bank Documents (เอกสารทางการเงิน)",
+                    "เอกสารครอบครัว/ทะเบียนบ้าน",
+                    "เอกสารแปลภาษาอังกฤษฉบับ Certified Translation"
+                ]
+            },
+            {
+                category: "3. Finance (งบประมาณและการเงิน)",
+                items: [
+                    "วางงบประมาณรวมสำหรับการย้ายอยู่อาศัย",
+                    "เตรียมเงินสำรองสภาพคล่อง",
+                    "สำรองค่าตั๋วเครื่องบิน",
+                    "สำรองค่าเช่าบ้านและค่ามัดจำ",
+                    "สำรองค่าอาหารช่วงเดือนแรก",
+                    "สำรองค่าเดินทางในเมือง",
+                    "สำรองค่าโทรศัพท์และอินเทอร์เน็ต",
+                    "สำรองค่าเสื้อผ้าสำหรับฤดูหนาว",
+                    "จัดสรรเงินฉุกเฉิน (Emergency Fund)",
+                    "ตรวจสอบบัตรเครดิต/เดบิตไทยที่สามารถใช้นอกประเทศได้"
+                ]
+            },
+            {
+                category: "4. Housing (ที่พักอาศัย)",
+                items: [
+                    "เลือกเมืองและย่านเป้าหมาย",
+                    "กำหนดงบประมาณค่าเช่าต่อเดือน",
+                    "ค้นหาที่พักชั่วคราวสำหรับช่วงแรก (AirBnb/Hotel)",
+                    "ตรวจสอบทำเลและระยะทางจากที่เรียน/ทำงาน",
+                    "ตรวจสอบระบบขนส่งสาธารณะในย่านนั้น",
+                    "อ่านเงื่อนไขในสัญญาเช่า (Lease Agreement) อย่างถี่ถ้วน",
+                    "ตรวจสอบเงื่อนไขเงินมัดจำ (Deposit)",
+                    "ตรวจสอบค่าสาธารณูปโภค (Utilities) ว่ารวมในค่าเช่าหรือไม่",
+                    "ตรวจสอบความพร้อมระบบ Internet และ Laundry",
+                    "ศึกษาและระมัดระวัง Rental Scam"
+                ]
+            },
+            {
+                category: "5. Job (การหางาน)",
+                items: [
+                    "ปรับแต่ง Resume ให้ตรงกับมาตรฐาน Canadian Format",
+                    "เขียน Cover Letter ภาษาอังกฤษ",
+                    "อัปเดตโปรไฟล์ LinkedIn ให้เป็นปัจจุบัน",
+                    "เตรียมรายชื่อผู้รับรอง (References)",
+                    "ฝึกฝนการสัมภาษณ์งานภาษาอังกฤษ",
+                    "เตรียมคำตอบเรื่องสถานะการทำงาน (Work Authorization Status)",
+                    "ค้นหางานผ่านเว็บ Job Boards (Indeed, LinkedIn)",
+                    "บันทึกประวัติการสมัครงาน"
+                ]
+            },
+            {
+                category: "6. Healthcare (สุขภาพและการแพทย์)",
+                items: [
+                    "ตรวจสอบสิทธิประกันสุขภาพประจำจังหวัด (Provincial Health Plan)",
+                    "ซื้อประกันสุขภาพเอกชนคุ้มครองช่วงรอสิทธิ (Waiting Period)",
+                    "เตรียมประวัติการรักษาและใบรับรองแพทย์ภาษาอังกฤษ",
+                    "เตรียมรายการและยาประจำตัวพร้อมฉลากภาษาอังกฤษ",
+                    "ค้นหาสถานพยาบาล Walk-in Clinic ใกล้ที่พัก"
+                ]
+            },
+            {
+                category: "7. Travel (การเดินทาง)",
+                items: [
+                    "จองตั๋วเครื่องบิน",
+                    "ตรวจสอบน้ำหนักและข้อกำหนดสัมภาระ",
+                    "เตรียมเอกสารเดินทางใส่กระเป๋าถือขึ้นเครื่อง",
+                    "บันทึกที่อยู่ปลายทางอย่างละเอียด",
+                    "เตรียม Emergency Contact ทั้งในไทยและแคนาดา",
+                    "เตรียม Adapter และอุปกรณ์ชาร์จไฟ"
+                ]
+            },
+            {
+                category: "8. First 30 Days (30 วันแรก)",
+                items: [
+                    "เปิดใช้งาน SIM / eSIM แคนาดา",
+                    "ขอ Social Insurance Number (SIN) ที่ Service Canada",
+                    "เปิดบัญชีธนาคาร (Newcomer Account)",
+                    "สมัครสิทธิ Health Card ประจำจังหวัด",
+                    "ซื้อบัตรโดยสารขนส่งสาธารณะ",
+                    "เริ่มสร้าง Credit History อย่างเหมาะสม"
+                ]
+            }
+        ];
+
+        const cityData = [
+            {
+                name: "Toronto",
+                province: "Ontario",
+                highlight: "ศูนย์กลางทางการเงิน เศรษฐกิจ และความหลากหลายทางวัฒนธรรมสูงสุด",
+                consideration: "ค่าครองชีพและค่าเช่าบ้านสูงมาก การแข่งขันในตลาดงานสูง",
+                weather: "หนาวจัดในฤดูหนาว (-10°C ถึง -20°C) ร้อนชื้นในฤดูร้อน",
+                transit: "ดีเยี่ยม (TTC: Bus, Subway, Streetcar)",
+                cost: "สูงมาก",
+                rent: "สูงมาก",
+                jobOps: "สูงมาก",
+                student: "เหมาะมาก",
+                family: "เหมาะ",
+                beginner: "ปานกลาง"
+            },
+            {
+                name: "Vancouver",
+                province: "British Columbia",
+                highlight: "ธรรมชาติสวยงาม อากาศอบอุ่นที่สุดในแคนาดา ย่านน่าอยู่อาศัย",
+                consideration: "ค่าอสังหาริมทรัพย์และค่าเช่าแพงที่สุด มีฝนตกบ่อยช่วงฤดูหนาว",
+                weather: "อบอุ่น หิมะตกน้อยกว่าเมืองอื่น มีฝนตกชื้นตลอดฤดูหนาว",
+                transit: "ดีเยี่ยม (TransLink: SkyTrain, Bus, SeaBus)",
+                cost: "สูงมาก",
+                rent: "สูงมาก",
+                jobOps: "สูง",
+                student: "เหมาะมาก",
+                family: "เหมาะมาก",
+                beginner: "ปานกลาง"
+            },
+            {
+                name: "Calgary",
+                province: "Alberta",
+                highlight: "ภาษีต่ำ (ไม่มี PST) ใกล้เทือกเขา Rockies ค่าครองชีพสมเหตุสมผล",
+                consideration: "เศรษฐกิจพึ่งพาอุตสาหกรรมพลังงาน อากาศหนาวเย็นยาวนาน",
+                weather: "หนาวแห้ง มีลม Chinook ช่วยให้อุ่นขึ้นเป็นพักๆ",
+                transit: "ปานกลาง (CTrain และ Bus)",
+                cost: "กลาง",
+                rent: "กลาง",
+                jobOps: "ปานกลาง-สูง",
+                student: "เหมาะ",
+                family: "เหมาะมาก",
+                beginner: "เหมาะมาก"
+            },
+            {
+                name: "Edmonton",
+                province: "Alberta",
+                highlight: "ค่าครองชีพถูก อสังหาริมทรัพย์จับต้องได้ง่าย เป็นเมืองการศึกษา",
+                consideration: "ฤดูหนาวหนาวจัดและยาวนานมาก",
+                weather: "หนาวจัดมากในฤดูหนาว (-20°C ถึง -30°C)",
+                transit: "ปานกลาง (LRT และ Bus)",
+                cost: "ต่ำ-กลาง",
+                rent: "ต่ำ-กลาง",
+                jobOps: "ปานกลาง",
+                student: "เหมาะ",
+                family: "เหมาะ",
+                beginner: "เหมาะมาก"
+            },
+            {
+                name: "Ottawa",
+                province: "Ontario",
+                highlight: "เมืองหลวง ปลอดภัย เหมาะกับครอบครัว มีงานภาครัฐและ Tech",
+                consideration: "ความบันเทิงยามค่ำคืนน้อยกว่าเมืองใหญ่ จำเป็นต้องใช้สองภาษา (อังกฤษ/ฝรั่งเศส) ในบางงาน",
+                weather: "หนาวจัดในฤดูหนาว ร้อนในฤดูร้อน",
+                transit: "ดี (OC Transpo: OC Train และ Bus)",
+                cost: "กลาง-สูง",
+                rent: "กลาง-สูง",
+                jobOps: "ปานกลาง",
+                student: "เหมาะ",
+                family: "เหมาะมาก",
+                beginner: "เหมาะ"
+            },
+            {
+                name: "Montreal",
+                province: "Quebec",
+                highlight: "ค่าเช่าสมเหตุสมผล วัฒนธรรมศิลปะและอาหารโดดเด่น",
+                consideration: "ใช้ภาษาฝรั่งเศสเป็นหลัก จำเป็นต้องเรียนรู้ภาษาฝรั่งเศส",
+                weather: "หนาวจัดมีหิมะตกหนาแน่นในฤดูหนาว",
+                transit: "ดีเยี่ยม (STM: Metro และ Bus)",
+                cost: "กลาง",
+                rent: "กลาง",
+                jobOps: "ปานกลาง (ต้องได้ภาษาฝรั่งเศส)",
+                student: "เหมาะมาก",
+                family: "เหมาะ",
+                beginner: "ปานกลาง"
+            }
+        ];
+
+        const dictionaryData = [
+            { en: "Rent", th: "ค่าเช่า", desc: "จำนวนเงินที่ต้องชำระรายเดือนสำหรับการเช่าที่พัก" },
+            { en: "Lease", th: "สัญญาเช่า", desc: "เอกสารสัญญาข้อตกลงการเช่าที่พักอาศัยอย่างเป็นทางการ" },
+            { en: "Landlord", th: "ผู้ให้เช่า / เจ้าของบ้าน", desc: "บุคคลหรือบริษัทที่เป็นเจ้าของอสังหาริมทรัพย์" },
+            { en: "Tenant", th: "ผู้เช่า", desc: "บุคคลที่ทำการเช่าและอยู่อาศัยในอสังหาริมทรัพย์" },
+            { en: "Deposit", th: "เงินมัดจำ", desc: "เงินประกันชำระล่วงหน้าเพื่อประกันความเสียหายหรือค่าเช่า" },
+            { en: "Utilities", th: "ค่าสาธารณูปโภค", desc: "ค่าไฟ ค่าค่าน้ำ ค่าแก๊ส ค่าทำความร้อน" },
+            { en: "Roommate", th: "เพื่อนร่วมห้อง", desc: "ผู้ที่แชร์ห้องพักหรือบ้านร่วมกัน" },
+            { en: "Employment", th: "การจ้างงาน", desc: "สถานะการทำงานหรือสัญญาจ้างงาน" },
+            { en: "Interview", th: "การสัมภาษณ์งาน", desc: "กระบวนการพูดคุยคัดเลือกเข้าทำงาน" },
+            { en: "Resume", th: "ประวัติการทำงาน", desc: "เอกสารสรุปประวัติการทำงานและการศึกษา" },
+            { en: "Reference", th: "บุคคลอ้างอิง", desc: "บุคคลที่สามารถรับรองประวัติการทำงานของคุณได้" },
+            { en: "Shift", th: "กะการทำงาน", desc: "ช่วงเวลาทำงานในแต่ละวัน" },
+            { en: "Salary", th: "เงินเดือน", desc: "ค่าตอบแทนการทำงานรายเดือนหรือรายปี" },
+            { en: "Tax", th: "ภาษี", desc: "ภาษีเงินได้หรือภาษีมูลค่าเพิ่ม (Sales Tax)" },
+            { en: "Bank Account", th: "บัญชีธนาคาร", desc: "บัญชีเงินฝากสำหรับธุรกรรมทางการเงิน" },
+            { en: "Debit Card", th: "บัตรเดบิต", desc: "บัตรชำระเงินตัดจากบัญชีออมทรัพย์หรือกระแสรายวันทันที" },
+            { en: "Credit Card", th: "บัตรเครดิต", desc: "บัตรวงเงินสินเชื่อชำระเงินล่วงหน้า" },
+            { en: "Credit Score", th: "คะแนนเครดิต", desc: "คะแนนวัดความน่าเชื่อถือทางการเงิน" },
+            { en: "Health Card", th: "บัตรประกันสุขภาพ", desc: "บัตรสิทธิการรักษาพยาบาลประจำจังหวัด" },
+            { en: "Pharmacy", th: "ร้านขายยา", desc: "สถานที่จำหน่ายยาและให้คำปรึกษาโดยเภสัชกร" },
+            { en: "Clinic", th: "คลินิก", desc: "สถานพยาบาลสำหรับการรักษาทั่วไป" },
+            { en: "Emergency Room", th: "ห้องฉุกเฉิน", desc: "แผนกฉุกเฉินในโรงพยาบาลสำหรับเคสเร่งด่วน" },
+            { en: "Public Transit", th: "ระบบขนส่งสาธารณะ", desc: "รถเมล์ รถไฟฟ้า หรือระบบขนส่งมวลชน" },
+            { en: "Grocery Store", th: "ร้านขายของซูเปอร์มาร์เก็ต", desc: "ร้านจำหน่ายอาหารและของใช้ในบ้าน" },
+            { en: "Receipt", th: "ใบเสร็จรับเงิน", desc: "หลักฐานการชำระเงิน" },
+            { en: "Cashier", th: "พนักงานแคชเชียร์", desc: "พนักงานรับชำระเงิน" },
+            { en: "Refund", th: "การรับเงินคืน", desc: "การขอคืนเงินเมื่อคืนสินค้า" },
+            { en: "Return", th: "การคืนสินค้า", desc: "นำสินค้าไปคืนตามนโยบายร้านค้า" },
+            { en: "Appointment", th: "การนัดหมาย", desc: "การลงวันเวลานัดล่วงหน้า" },
+            { en: "Insurance", th: "การประกันภัย", desc: "สัญญาประกันคุ้มครองความเสี่ยง" },
+            { en: "Driver's License", th: "ใบขับขี่", desc: "เอกสารอนุญาตขับขี่ยานพาหนะ" },
+            { en: "ID", th: "บัตรแสดงตน", desc: "เอกสารยืนยันตัวตน" },
+            { en: "Address", th: "ที่อยู่", desc: "สถานที่พักอาศัย" },
+            { en: "Postal Code", th: "รหัสไปรษณีย์", desc: "รหัสระบุพื้นที่ไปรษณีย์ (ในแคนาดาเป็นตัวอักษรสลับตัวเลข)" },
+            { en: "Province", th: "มณฑล / จังหวัด", desc: "เขตการปกครองระดับมณฑลของแคนาดา" },
+            { en: "Neighbourhood", th: "ย่าน / ละแวกบ้าน", desc: "บริเวณพื้นที่ชุมชนโดยรอบ" },
+            { en: "Basement", th: "ชั้นใต้ดิน", desc: "ห้องพักหรือพื้นที่ที่อยู่ชั้นล่างสุดของบ้าน" },
+            { en: "Apartment", th: "อพาร์ตเมนต์", desc: "ห้องพักเช่าในอาคารที่มีบริษัทดูแล" },
+            { en: "Condo", th: "คอนโดมิเนียม", desc: "ห้องพักอาศัยที่มีเจ้าของยูนิตแยกรายบุคคล" },
+            { en: "Laundry", th: "การซักเสื้อผ้า", desc: "ห้องหรือบริการซักรีดเสื้อผ้า" },
+            { en: "Parking", th: "ที่จอดรถ", desc: "พื้นที่สำหรับจอดยานพาหนะ" },
+            { en: "Heating", th: "ระบบทำความร้อน", desc: "ระบบปรับอุณหภูมิให้อบอุ่นในฤดูหนาว" },
+            { en: "Internet", th: "อินเทอร์เน็ต", desc: "เครือข่ายสัญญาณการสื่อสาร" },
+            { en: "Cell Phone", th: "โทรศัพท์มือถือ", desc: "อุปกรณ์โทรศัพท์เคลื่อนที่" },
+            { en: "SIM", en_term: "SIM Card", th: "ซิมการ์ด", desc: "การ์ดระบุหมายเลขโทรศัพท์" },
+            { en: "eSIM", th: "อีซิม", desc: "ซิมการ์ดแบบฝังดิจิทัล" },
+            { en: "Winter", th: "ฤดูหนาว", desc: "ช่วงฤดูกาลที่มีอากาศเย็นจัดและหิมะ" },
+            { en: "Jacket", th: "เสื้อแจ็คเก็ต / เสื้อกันหนาว", desc: "เครื่องแต่งกายชั้นนอกกันลมและหนาว" },
+            { en: "Boots", th: "รองเท้าบูท", desc: "รองเท้าหุ้มข้อสำหรับลุยหิมะหรือฝน" },
+            { en: "Gloves", th: "ถุงมือ", desc: "อุปกรณ์สวมใส่ป้องกันความเย็นที่มือ" }
+        ];
+
+        // ==========================================
+        // INITIALIZATION & EVENT LISTENERS
+        // ==========================================
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+            renderMasterChecklist();
+            renderTimeline();
+            renderImmigrationGuide();
+            renderDocumentGuide();
+            renderCityOptions();
+            renderCityCards();
+            renderHousingTypes();
+            renderJobGuide();
+            renderHealthcareGuide();
+            renderBankingGuide();
+            renderPackingChecklist();
+            renderFirst30Days();
+            renderDictionary();
+            loadTravelDate();
+            loadEmergencyData();
+            calculateBudget();
+            updateAllProgress();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.section-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetPage = document.getElementById(tabId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(tabId)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Close mobile menu if open
+            document.getElementById('nav-menu').classList.remove('show');
+        }
+
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('show');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('canada_move_dark', isDark);
+            document.getElementById('theme-toggle').innerText = isDark ? "☀️ Light" : "🌙 Dark";
+        }
+
+        function loadTheme() {
+            const isDark = localStorage.getItem('canada_move_dark') === 'true';
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('theme-toggle').innerText = "☀️ Light";
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+
+        // ==========================================
+        // CHECKLIST LOGIC
+        // ==========================================
+
+        function renderMasterChecklist() {
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = '';
+
+            const savedState = JSON.parse(localStorage.getItem('canada_move_checklist') || '{}');
+
+            masterChecklistData.forEach((group, gIdx) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'card checklist-group';
+                
+                let groupHtml = `<h3>${group.category}</h3>`;
+                group.items.forEach((item, iIdx) => {
+                    const key = `chk_${gIdx}_${iIdx}`;
+                    const isChecked = savedState[key] ? 'checked' : '';
+                    const doneClass = savedState[key] ? 'done' : '';
+
+                    groupHtml += `
+                        <div class="checklist-item ${doneClass}" id="item_box_${key}">
+                            <input type="checkbox" id="${key}" ${isChecked} onchange="toggleChecklist('${key}')">
+                            <label for="${key}">${item}</label>
+                        </div>
+                    `;
+                });
+
+                groupDiv.innerHTML = groupHtml;
+                container.appendChild(groupDiv);
+            });
+        }
+
+        function toggleChecklist(key) {
+            const savedState = JSON.parse(localStorage.getItem('canada_move_checklist') || '{}');
+            const checkbox = document.getElementById(key);
+            const itemBox = document.getElementById(`item_box_${key}`);
+
+            if (checkbox.checked) {
+                savedState[key] = true;
+                if (itemBox) itemBox.classList.add('done');
+            } else {
+                delete savedState[key];
+                if (itemBox) itemBox.classList.remove('done');
+            }
+
+            localStorage.setItem('canada_move_checklist', JSON.stringify(savedState));
+            updateAllProgress();
+        }
+
+        function updateAllProgress() {
+            const savedState = JSON.parse(localStorage.getItem('canada_move_checklist') || '{}');
+            let total = 0;
+            masterChecklistData.forEach(g => total += g.items.length);
+            const done = Object.keys(savedState).length;
+            const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+            // Dashboard Updates
+            document.getElementById('dash-done-count').innerText = done;
+            document.getElementById('dash-total-count').innerText = total;
+            document.getElementById('dash-percent').innerText = `${percent}%`;
+            document.getElementById('dash-progress-bar').style.width = `${percent}%`;
+
+            // Checklist Page Updates
+            document.getElementById('checklist-progress-text').innerText = `${done} / ${total} (${percent}%)`;
+            document.getElementById('checklist-progress-fill').style.width = `${percent}%`;
+
+            // Next Steps fill
+            const nextStepsContainer = document.getElementById('dash-next-steps');
+            nextStepsContainer.innerHTML = '';
+            let uncompletedCount = 0;
+
+            masterChecklistData.forEach((g, gIdx) => {
+                g.items.forEach((item, iIdx) => {
+                    const key = `chk_${gIdx}_${iIdx}`;
+                    if (!savedState[key] && uncompletedCount < 4) {
+                        const li = document.createElement('li');
+                        li.innerText = `[${g.category.split(' ')[1]}] ${item}`;
+                        nextStepsContainer.appendChild(li);
+                        uncompletedCount++;
+                    }
+                });
+            });
+
+            if (uncompletedCount === 0) {
+                nextStepsContainer.innerHTML = '<li>🎉 ยินดีด้วย! คุณเตรียมตัวครบทุกรายการใน Checklist แล้ว</li>';
+            }
+        }
+
+        function resetChecklist() {
+            if (confirm("คุณแน่ใจหรือไม่ว่าต้องการล้างค่า Checklist ทั้งหมด?")) {
+                localStorage.removeItem('canada_move_checklist');
+                renderMasterChecklist();
+                updateAllProgress();
+                showToast("ล้างข้อมูล Checklist เรียบร้อย");
+            }
+        }
+
+        // ==========================================
+        // COUNTDOWN & DATE
+        // ==========================================
+
+        function saveTravelDate() {
+            const val = document.getElementById('travel-date').value;
+            localStorage.setItem('canada_move_travel_date', val);
+            updateCountdownText(val);
+        }
+
+        function loadTravelDate() {
+            const saved = localStorage.getItem('canada_move_travel_date');
+            if (saved) {
+                document.getElementById('travel-date').value = saved;
+                updateCountdownText(saved);
+            }
+        }
+
+        function updateCountdownText(dateStr) {
+            if (!dateStr) return;
+            const target = new Date(dateStr);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const diffTime = target - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            const display = document.getElementById('countdown-text');
+            if (isNaN(diffDays)) {
+                display.innerText = "กรุณาเลือกวันเดินทาง";
+            } else if (diffDays > 0) {
+                display.innerText = `เหลือเวลาอีก ${diffDays} วัน จะถึงวันเดินทาง ✈️`;
+            } else if (diffDays === 0) {
+                display.innerText = `เดินทางวันนี้! ขอให้โชคดี 🎉🇨🇦`;
+            } else {
+                display.innerText = `เดินทางไปแล้วเมื่อ ${Math.abs(diffDays)} วันก่อน 🇨🇦`;
+            }
+        }
+
+        // ==========================================
+        // PERSONAL PLANNER
+        // ==========================================
+
+        function generatePersonalPlan() {
+            const age = document.getElementById('plan-age').value;
+            const family = document.getElementById('plan-family').value;
+            const goal = document.getElementById('plan-goal').value;
+            const budget = parseFloat(document.getElementById('plan-budget').value) || 0;
+            const english = document.getElementById('plan-english').value;
+            const city = document.getElementById('plan-city').value;
+
+            let html = `<ul>`;
+
+            // Budget evaluation
+            if (budget < 300000) {
+                html += `<li><strong>ข้อแนะนำด้านงบประมาณ:</strong> งบประมาณที่มีอยู่ในระดับค่อนข้างจำกัด แนะนำให้พิจารณาเลือกเมืองที่มีค่าครองชีพระดับต่ำ-กลาง เช่น Calgary, Edmonton หรือ Winnipeg และควรจัดเตรียมสำรองงบฉุกเฉินอย่างเคร่งครัด</li>`;
+            } else {
+                html += `<li><strong>ข้อแนะนำด้านงบประมาณ:</strong> คุณมีงบประมาณเริ่มต้นอยู่ในระดับที่บริหารจัดการได้ แนะนำให้ใช้เครื่องคำนวณงบประมาณเพื่อวางแผนเงินสำรองล่วงหน้า 3-6 เดือน</li>`;
+            }
+
+            // Goal evaluation
+            if (goal === 'study') {
+                html += `<li><strong>เป้าหมายเรียนต่อ:</strong> ตรวจสอบว่าสถาบันเปิดสอนหลักสูตรที่ตรงตามเงื่อนไข Post-Graduation Work Permit (PGWP) และศึกษาเงื่อนไขชั่วโมงการทำงานระหว่างเรียน</li>`;
+            } else if (goal === 'work') {
+                html += `<li><strong>เป้าหมายทำงาน:</strong> เน้นการปรับปรุง Resumé ให้เป็น Canadian Format และสร้างเครือข่ายบน LinkedIn รวมถึงตรวจสอบประเภทของ Work Permit (Open vs Employer-specific)</li>`;
+            } else if (goal === 'pr') {
+                html += `<li><strong>เป้าหมายย้ายถิ่นฐาน:</strong> ศึกษาคะแนน CRS ของระบบ Express Entry และเงื่อนไขการรับสมัครของ Provincial Nominee Program (PNP) ของแต่ละมณฑล</li>`;
+            }
+
+            // Family evaluation
+            if (family === 'family') {
+                html += `<li><strong>คำแนะนำสำหรับครอบครัว:</strong> ควรศึกษาข้อมูลเกี่ยวกับการสมัครโรงเรียนให้บุตร (Public School), ที่พักขนาดเหมาะสม และระบบสวัสดิการสุขภาพครอบครัว</li>`;
+            }
+
+            // English evaluation
+            if (english === 'basic') {
+                html += `<li><strong>การพัฒนาภาษา:</strong> ควรเร่งพัฒนาทักษะภาษาอังกฤษทันที เนื่องจากเป็นปัจจัยสำคัญทั้งการยื่นวีซ่า การสมัครงาน และการปรับตัวในชีวิตประจำวัน</li>`;
+            }
+
+            html += `</ul>`;
+
+            document.getElementById('plan-result-content').innerHTML = html;
+            document.getElementById('plan-result-card').style.display = 'block';
+            showToast("สร้างแผนคำแนะนำเรียบร้อย");
+        }
+
+        // ==========================================
+        // BUDGET CALCULATOR
+        // ==========================================
+
+        function calculateBudget() {
+            const savings = parseFloat(document.getElementById('calc-savings').value) || 0;
+            
+            const flight = parseFloat(document.getElementById('calc-flight').value) || 0;
+            const deposit = parseFloat(document.getElementById('calc-deposit').value) || 0;
+            const winterGear = parseFloat(document.getElementById('calc-winter-gear').value) || 0;
+            const visaFees = parseFloat(document.getElementById('calc-visafees').value) || 0;
+            const emergency = parseFloat(document.getElementById('calc-emergency').value) || 0;
+
+            const upfrontTotal = flight + deposit + winterGear + visaFees + emergency;
+
+            const rent = parseFloat(document.getElementById('calc-rent').value) || 0;
+            const food = parseFloat(document.getElementById('calc-food').value) || 0;
+            const transit = parseFloat(document.getElementById('calc-transit').value) || 0;
+            const phone = parseFloat(document.getElementById('calc-phone').value) || 0;
+            const internet = parseFloat(document.getElementById('calc-internet').value) || 0;
+            const insurance = parseFloat(document.getElementById('calc-insurance').value) || 0;
+            const other = parseFloat(document.getElementById('calc-other').value) || 0;
+
+            const monthlyTotal = rent + food + transit + phone + internet + insurance + other;
+
+            const remainingSavings = savings - upfrontTotal;
+            const threeMonths = upfrontTotal + (monthlyTotal * 3);
+            const sixMonths = upfrontTotal + (monthlyTotal * 6);
+
+            const runwayMonths = monthlyTotal > 0 ? (remainingSavings / monthlyTotal).toFixed(1) : 0;
+
+            document.getElementById('res-upfront').innerText = `$${upfrontTotal.toLocaleString()}`;
+            document.getElementById('res-monthly').innerText = `$${monthlyTotal.toLocaleString()}`;
+            document.getElementById('res-remaining').innerText = `$${remainingSavings.toLocaleString()}`;
+            document.getElementById('res-3months').innerText = `$${threeMonths.toLocaleString()}`;
+            document.getElementById('res-6months').innerText = `$${sixMonths.toLocaleString()}`;
+            document.getElementById('res-runway').innerText = `${runwayMonths > 0 ? runwayMonths : 0} เดือน`;
+        }
+
+        // ==========================================
+        // CITY COMPARISON & RENDERING
+        // ==========================================
+
+        function renderCityOptions() {
+            const s1 = document.getElementById('city-select-1');
+            const s2 = document.getElementById('city-select-2');
+            s1.innerHTML = '';
+            s2.innerHTML = '';
+
+            cityData.forEach((c, idx) => {
+                s1.innerHTML += `<option value="${idx}">${c.name} (${c.province})</option>`;
+                s2.innerHTML += `<option value="${idx}" ${idx === 1 ? 'selected' : ''}>${c.name} (${c.province})</option>`;
+            });
+
+            compareCities();
+        }
+
+        function compareCities() {
+            const idx1 = document.getElementById('city-select-1').value;
+            const idx2 = document.getElementById('city-select-2').value;
+            const c1 = cityData[idx1];
+            const c2 = cityData[idx2];
+
+            const html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>หัวข้อเปรียบเทียบ</th>
+                            <th>${c1.name} (${c1.province})</th>
+                            <th>${c2.name} (${c2.province})</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>จุดเด่น</strong></td><td>${c1.highlight}</td><td>${c2.highlight}</td></tr>
+                        <tr><td><strong>ข้อพิจารณา</strong></td><td>${c1.consideration}</td><td>${c2.consideration}</td></tr>
+                        <tr><td><strong>สภาพอากาศ</strong></td><td>${c1.weather}</td><td>${c2.weather}</td></tr>
+                        <tr><td><strong>ค่าครองชีพโดยรวม</strong></td><td>${c1.cost}</td><td>${c2.cost}</td></tr>
+                        <tr><td><strong>ระดับค่าเช่า</strong></td><td>${c1.rent}</td><td>${c2.rent}</td></tr>
+                        <tr><td><strong>ระบบขนส่ง</strong></td><td>${c1.transit}</td><td>${c2.transit}</td></tr>
+                        <tr><td><strong>โอกาสงาน</strong></td><td>${c1.jobOps}</td><td>${c2.jobOps}</td></tr>
+                        <tr><td><strong>ความเหมาะสมกับผู้เริ่มต้น</strong></td><td>${c1.beginner}</td><td>${c2.beginner}</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('city-comparison-table-container').innerHTML = html;
+        }
+
+        function renderCityCards() {
+            const container = document.getElementById('city-cards-container');
+            container.innerHTML = '';
+
+            cityData.forEach(c => {
+                container.innerHTML += `
+                    <div class="card">
+                        <h3>🏙️ ${c.name}, ${c.province}</h3>
+                        <p><strong>จุดเด่น:</strong> ${c.highlight}</p>
+                        <p><strong>ข้อควรพิจารณา:</strong> ${c.consideration}</p>
+                        <hr style="margin: 8px 0;">
+                        <p>🌤️ <strong>สภาพอากาศ:</strong> ${c.weather}</p>
+                        <p>🚌 <strong>ระบบขนส่ง:</strong> ${c.transit}</p>
+                        <p>💰 <strong>ค่าครองชีพ / ค่าเช่า:</strong> ${c.cost} / ${c.rent}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // ==========================================
+        // OTHER STATIC RENDERERS
+        // ==========================================
+
+        function renderTimeline() {
+            const items = [
+                { stage: "6 เดือนก่อนเดินทาง", desc: "ตรวจสอบ Passport, วางแผนงบประมาณ, สมัครเรียน/ยื่นวีซ่า, เริ่มเรียนภาษา" },
+                { stage: "3 เดือนก่อนเดินทาง", desc: "ตรวจสุขภาพ, ยื่นเอกสารทางการเงิน, ค้นหาที่พักชั่วคราว, จองตั๋วเครื่องบิน" },
+                { stage: "1 เดือนก่อนเดินทาง", desc: "เตรียมเอกสารเดินทางทั้งหมด, จัดเตรียมยา/เสื้อผ้าหนาว, ซื้อ eSIM" },
+                { stage: "1 สัปดาห์ก่อนเดินทาง", desc: "แลกเงินสำรอง, ตรวจสอบน้ำหนักกระเป๋า, พิมพ์เอกสารสำคัญ" },
+                { stage: "วันเดินทาง", desc: "เดินทางถึงสนามบินล่วงหน้า, พกพาเอกสารสำคัญขึ้นเครื่อง" },
+                { stage: "สัปดาห์แรก", desc: "ขอ SIN, เปิดบัญชีธนาคาร, เปิดเบอร์โทรศัพท์, สมัคร Health Card" },
+                { stage: "30 วันแรก", desc: "สำรวจเมือง, เริ่มสมัครงาน, ปรับตัวกับค่าใช้จ่ายจริง" }
+            ];
+
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = items.map(t => `
+                <div class="card" style="border-left: 4px solid var(--primary);">
+                    <h4>📌 ${t.stage}</h4>
+                    <p style="margin-top: 5px;">${t.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderImmigrationGuide() {
+            const guides = [
+                { title: "Visitor Visa (วีซ่าท่องเที่ยว)", desc: "สำหรับผู้ต้องการไปเที่ยว เยี่ยมญาติ หรือสำรวจเมืองระยะสั้น ไม่สามารถทำงานได้" },
+                { title: "Study Permit (ใบอนุญาตเรียน)", desc: "สำหรับผู้เข้าศึกษาในสถานศึกษาที่กำหนด (DLI) ทำงานระหว่างเรียนได้ตามเงื่อนไขที่กำหนด" },
+                { title: "Work Permit (ใบอนุญาตทำงาน)", desc: "แบ่งเป็น Open Work Permit (ทำงานกับนายจ้างใดก็ได้) และ Employer-Specific (ทำงานเฉพาะนายจ้างที่ระบุ)" },
+                { title: "Express Entry (ระบบย้ายถิ่นฐานสายทักษะ)", desc: "ระบบคัดเลือกคนย้ายถิ่นฐานฐานคะแนน (CRS) ประกอบด้วย FSWP, CEC, และ FSTP" },
+                { title: "PNP (Provincial Nominee Program)", desc: "โครงการเสนอชื่อโดยมณฑล สำหรับผู้มีทักษะที่มณฑลนั้น ๆ กำลังขาดแคลน" }
+            ];
+
+            const container = document.getElementById('immigration-container');
+            container.innerHTML = guides.map(g => `
+                <div class="card">
+                    <h3>🍁 ${g.title}</h3>
+                    <p style="margin-top: 8px;">${g.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderDocumentGuide() {
+            const docs = [
+                { title: "เอกสารส่วนตัว", items: "Passport, บัตรประชาชน, สูติบัตร, ทะเบียนบ้าน, เอกสารเปลี่ยนชื่อ-สกุล (ถ้ามี)" },
+                { title: "เอกสารการศึกษา", items: "Degree Certificate, Transcript, ผลสอบภาษา (IELTS/CELPIP), เอกสาร ECA" },
+                { title: "เอกสารการทำงาน", items: "Reference Letter จากนายจ้างเก่า, Resume ภาษาอังกฤษ, Slip เงินเดือน" },
+                { title: "เอกสารการเงิน", items: "Bank Statement ย้อนหลัง, หนังสือรับรองยอดเงินจากธนาคาร (Bank Letter)" }
+            ];
+
+            const container = document.getElementById('documents-container');
+            container.innerHTML = docs.map(d => `
+                <div class="card">
+                    <h3>📁 ${d.title}</h3>
+                    <p style="margin-top: 5px;"><strong>รายการสำคัญ:</strong> ${d.items}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderHousingTypes() {
+            const types = [
+                { name: "Apartment", desc: "อาคารเช่าที่ดูแลโดยบริษัทเช่า มีระบบการจัดการเป็นทางการ" },
+                { name: "Condo", desc: "คอนโดมิเนียมของเจ้าของรายบุคคล มักมีสิ่งอำนวยความสะดวกครบถ้วน" },
+                { name: "Basement", desc: "ห้องพักชั้นใต้ดินของบ้านเดี่ยว ราคาประหยัดกว่า" },
+                { name: "Room Rental / Shared", desc: "เช่าเฉพาะห้องนอนและใช้พื้นที่ส่วนกลางร่วมกับผู้อื่น" }
+            ];
+
+            const container = document.getElementById('housing-types-container');
+            container.innerHTML = types.map(t => `
+                <div style="padding: 10px; border: 1px solid var(--border); border-radius: 5px;">
+                    <h4>${t.name}</h4>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">${t.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderJobGuide() {
+            const container = document.getElementById('job-guide-container');
+            container.innerHTML = `
+                <div class="card">
+                    <h3>🔍 ช่องทางและการเตรียมตัวหางาน</h3>
+                    <p><strong>1. Job Portals:</strong> เว็บไซต์ยอดนิยม ได้แก่ Indeed Canada, LinkedIn, Glassdoor, และ Canada Job Bank</p>
+                    <p><strong>2. Networking:</strong> การสร้างคอนเนกชันผ่าน LinkedIn และงาน Meetup มีความสำคัญมากในตลาดงานแคนาดา</p>
+                    <p><strong>3. Work Authorization:</strong> ต้องระบุใน Resumé หรือการสัมภาษณ์ให้ชัดเจนว่ามีสิทธิทำงานถูกต้องตามกฎหมาย</p>
+                </div>
+            `;
+        }
+
+        function renderHealthcareGuide() {
+            const container = document.getElementById('healthcare-container');
+            container.innerHTML = `
+                <div class="card">
+                    <h3>🏥 ประเภทสถานพยาบาล</h3>
+                    <ul>
+                        <li><strong>Walk-in Clinic:</strong> สำหรับการเจ็บป่วยทั่วไป ไม่ต้องนัดหมายล่วงหน้า</li>
+                        <li><strong>Family Doctor:</strong> แพทย์ประจำตัวสำหรับการดูแลระยะยาว (ต้องลงชื่อรอคิว)</li>
+                        <li><strong>Emergency Room (ER):</strong> สำหรับเคสฉุกเฉินรุนแรงในโรงพยาบาล</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>💊 ร้านขายยา & บัตรสุขภาพ</h3>
+                    <ul>
+                        <li><strong>Pharmacy:</strong> ซื้อยาตามใบสั่งแพทย์ (Prescription) เช่น Shoppers Drug Mart, Rexall</li>
+                        <li><strong>Health Card:</strong> บัตรสิทธิรักษาพยาบาลฟรีของรัฐ (เช่น OHIP ใน Ontario, MSP ใน BC)</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function renderBankingGuide() {
+            const container = document.getElementById('banking-container');
+            container.innerHTML = `
+                <div class="card">
+                    <h3>🏦 ประเภทบัญชีธนาคาร</h3>
+                    <p><strong>Chequing Account:</strong> บัญชีสำหรับใช้จ่ายประจำวัน ใช้คู่กับบัตร Debit</p>
+                    <p><strong>Savings Account:</strong> บัญชีเงินฝากออมทรัพย์รับดอกเบี้ย</p>
+                </div>
+                <div class="card">
+                    <h3>💳 บัตรเครดิต & Interac e-Transfer</h3>
+                    <p><strong>Credit Card:</strong> สำคัญมากในการสร้าง Credit Score ในแคนาดา</p>
+                    <p><strong>Interac e-Transfer:</strong> ระบบโอนเงินระหว่างธนาคารที่สะดวกและนิยมที่สุดในแคนาดา</p>
+                </div>
+            `;
+        }
+
+        function renderPackingChecklist() {
+            const items = [
+                "Passport และเอกสารสำคัญฉบับจริง",
+                "ยาประจำตัวพร้อมฉลากภาษาอังกฤษ",
+                "Adapter แปลงหัวปลั๊ก (แคนาดาใช้ขาแบน 110V)",
+                "เสื้อผ้าหนาวชั้นใน (Thermal/Heattech)",
+                "รองเท้าลุยหิมะที่มีดอกยางกันลื่น",
+                "แว่นตา / คอนแทคเลนส์สำรอง (ราคาในแคนาดาสูงกว่า)"
+            ];
+
+            const container = document.getElementById('packing-checklist-container');
+            container.innerHTML = `
+                <h3>🎒 รายการสิ่งของที่ควรเตรียมจากไทย</h3>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    ${items.map(i => `<li style="margin-bottom: 5px;">${i}</li>`).join('')}
+                </ul>
+            `;
+        }
+
+        function renderFirst30Days() {
+            const container = document.getElementById('first30-container');
+            container.innerHTML = `
+                <div class="card">
+                    <h3>📅 สัปดาห์ที่ 1: การตั้งไข่และจัดการเอกสารสำคัญ</h3>
+                    <ul>
+                        <li>ขอ Social Insurance Number (SIN) ที่ศูนย์ Service Canada</li>
+                        <li>เปิดบัญชีธนาคารสำหรับผู้ย้ายถิ่นฐานใหม่ (Newcomer Package)</li>
+                        <li>เปิดเบอร์โทรศัพท์มือถือและเปิดใช้งานอินเทอร์เน็ต</li>
+                        <li>ยื่นขอ บัตรประกันสุขภาพประจำมณฑล (Health Card)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>📅 สัปดาห์ที่ 2-4: การปรับตัวและการสร้างรากฐาน</h3>
+                    <ul>
+                        <li>ซื้อของใช้ในบ้านและวัตถุดิบประกอบอาหาร</li>
+                        <li>ทำความคุ้นเคยกับระบบขนส่งสาธารณะและเส้นทางประจำ</li>
+                        <li>เริ่มสมัครงาน ยื่น Resumé หรือสร้างเครือข่าย Networking</li>
+                        <li>ทบทวนค่าใช้จ่ายจริงเทียบกับงบประมาณที่วางไว้</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function renderDictionary() {
+            const tbody = document.getElementById('dict-table-body');
+            tbody.innerHTML = '';
+
+            dictionaryData.forEach(d => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${d.en}</strong></td>
+                    <td>${d.th}</td>
+                    <td>${d.desc}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterDictionary() {
+            const q = document.getElementById('dict-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#dict-table-body tr');
+
+            rows.forEach(r => {
+                const text = r.innerText.toLowerCase();
+                r.style.display = text.includes(q) ? '' : 'none';
+            });
+        }
+
+        // ==========================================
+        // LOCAL STORAGE & EMERGENCY DATA
+        // ==========================================
+
+        function saveEmergencyData() {
+            const data = {
+                address: document.getElementById('em-address').value,
+                contact: document.getElementById('em-contact').value,
+                landlord: document.getElementById('em-landlord').value,
+                employer: document.getElementById('em-employer').value
+            };
+            localStorage.setItem('canada_move_emergency', JSON.stringify(data));
+            showToast("บันทึกข้อมูลฉุกเฉินแล้ว");
+        }
+
+        function loadEmergencyData() {
+            const saved = localStorage.getItem('canada_move_emergency');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('em-address').value = data.address || '';
+                document.getElementById('em-contact').value = data.contact || '';
+                document.getElementById('em-landlord').value = data.landlord || '';
+                document.getElementById('em-employer').value = data.employer || '';
+            }
+
+            const savedPhone = localStorage.getItem('canada_move_phone_note');
+            if (savedPhone) {
+                const p = JSON.parse(savedPhone);
+                document.getElementById('phone-provider').value = p.provider || '';
+                document.getElementById('phone-plan').value = p.plan || '';
+            }
+        }
+
+        function savePhoneNote() {
+            const data = {
+                provider: document.getElementById('phone-provider').value,
+                plan: document.getElementById('phone-plan').value
+            };
+            localStorage.setItem('canada_move_phone_note', JSON.stringify(data));
+            document.getElementById('phone-note-saved').innerText = "บันทึกโน้ตเรียบร้อยแล้ว";
+        }
+
+        function exportData() {
+            const allData = {
+                checklist: JSON.parse(localStorage.getItem('canada_move_checklist') || '{}'),
+                travelDate: localStorage.getItem('canada_move_travel_date') || '',
+                emergency: JSON.parse(localStorage.getItem('canada_move_emergency') || '{}'),
+                phoneNote: JSON.parse(localStorage.getItem('canada_move_phone_note') || '{}')
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "canada_move_planner_data.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function confirmResetAll() {
+            if (confirm("🚨 คุณแน่ใจหรือไม่ว่าต้องการล้างข้อมูลทั้งหมด? ข้อมูลบันทึกทั้งหมดจะหายไป")) {
+                localStorage.clear();
+                alert("ล้างข้อมูลเรียบร้อยแล้ว หน้าเว็บจะรีโหลด");
+                location.reload();
+            }
+        }
+
+        // ==========================================
+        // GLOBAL SEARCH
+        // ==========================================
+
+        function handleGlobalSearch() {
+            const q = document.getElementById('global-search-input').value.toLowerCase().trim();
+            const container = document.getElementById('search-results');
+            container.innerHTML = '';
+
+            if (q.length < 2) return;
+
+            const searchablePages = [
+                { id: 'checklist', title: 'Checklist รายการเตรียมตัว' },
+                { id: 'immigration', title: 'ข้อมูล วีซ่า & Immigration' },
+                { id: 'documents', title: 'คู่มือเอกสาร' },
+                { id: 'budget', title: 'งบประมาณ & เครื่องคำนวณ' },
+                { id: 'cities', title: 'ข้อมูลเมืองต่าง ๆ' },
+                { id: 'housing', title: 'การหาที่พักอาศัย' },
+                { id: 'jobs', title: 'การหางานในแคนาดา' },
+                { id: 'healthcare', title: 'การแพทย์ & สุขภาพ' },
+                { id: 'banking', title: 'ระบบธนาคาร' },
+                { id: 'weather', title: 'อากาศ & การแต่งตัว' },
+                { id: 'dictionary', title: 'คำศัพท์ภาษาอังกฤษ' }
+            ];
+
+            let count = 0;
+            searchablePages.forEach(p => {
+                const elem = document.getElementById(p.id);
+                if (elem && elem.innerText.toLowerCase().includes(q)) {
+                    count++;
+                    container.innerHTML += `
+                        <div class="search-card" onclick="switchTab('${p.id}')">
+                            <strong>📌 พบใน section: ${p.title}</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">คลิกเพื่อไปยังหน้านี้...</p>
+                        </div>
+                    `;
+                }
+            });
+
+            if (count === 0) {
+                container.innerHTML = '<p style="font-size:0.85rem; color:var(--text-muted);">ไม่พบข้อมูลที่ตรงกับคำค้นหา</p>';
+            }
+        }
+    </script>
+</body>
+</html>
